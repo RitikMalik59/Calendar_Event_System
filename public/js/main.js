@@ -5,6 +5,11 @@ $(document).ready(function () {
   var calendar = new FullCalendar.Calendar(calendarEl, {
 
     initialView: 'dayGridMonth',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
     timeZone: 'UTC',
     events: 'api/calender/getEvents',
     eventDidMount: function (info) {
