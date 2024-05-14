@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/calender/getEvents', [EventController::class, 'index']);
+Route::post('/calender/addEvent', [EventController::class, 'store']);

@@ -18,7 +18,7 @@ class EventController extends Controller
         $start = $request->get('start');
         $end = $request->get('end');
         // dd($start);
-        // $query = Event::whereDate('start_date', $start)->dd();
+        // $query = Event::whereDate('start_date', '>=', $start)->get();
         $query = Event::whereBetween('start_date', [$start, $end])->get();
         // dd($query);
         $events = EventResource::collection($query);
@@ -33,6 +33,11 @@ class EventController extends Controller
     public function store(Request $request)
     {
         //
+        // echo 'success';
+        $data = $request->all();
+        // dd($data);
+        $event = Event::create($data);
+        return response()->json($event);
     }
 
     /**
