@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Http\Resources\EventCollection;
+use App\Http\Resources\EventResource;
 
 class EventController extends Controller
 {
@@ -12,7 +14,11 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        // $events = Event::all();
+        $events = EventResource::collection(Event::all());
+        return response()->json($events);
+        // return response()->json(EventResource::collection(Event::all()));
+
     }
 
     /**
