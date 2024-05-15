@@ -22,7 +22,8 @@ function display_calender() {
       console.log(info);
       $('#calendarAddModal').modal("show");
       // document.getElementById("start_date").value = info.dateStr;
-      +
+      $('#title').val('');
+      $('#description').val('');
       $('#start_date').val(info.dateStr);
       $('#end_date').val(info.dateStr);
 
@@ -35,12 +36,20 @@ function display_calender() {
 
     },
     eventClick: function (info, jsEvent, view) {
-      console.log(info.event.title);
-      $('#modalTitle').html(event.title);
-      $('#modalBody').html(event.description);
-      $('#eventUrl').attr('href', event.url);
-      $('#calendarModal').modal("show");
-      // $("#myModal").modal("show");
+      $('#display_event').modal("show");
+
+      // Event Detail
+      const title = info.event.title;
+      const description = info.event.extendedProps.description;
+      const start_date = moment(info.event.start).format("Do MMM YYYY");
+      const end_date = info.event.end ? moment(info.event.end).format("Do MMM YYYY") : start_date;
+      // console.log(info.event);
+
+      // display in modal
+      $('#event_title').text(title);
+      $('#event_description').text(description);
+      $('#event_start').text(start_date);
+      $('#event_end').text(end_date);
 
     },
     eventDidMount: function (info) {
@@ -50,9 +59,9 @@ function display_calender() {
     editable: true,
 
     eventResize: function (info) {
-      alert(info.event.title + " end is now " + info.event.end.toISOString());
+      // alert(info.event.title + " end is now " + info.event.end.toISOString());
       // info.revert();
-      if (!confirm("is this okay?")) {
+      if (confirm("Press okay to revert back event size?")) {
         info.revert();
       }
     }
