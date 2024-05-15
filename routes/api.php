@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/calender/getEvents', [EventController::class, 'index']);
 Route::post('/calender/addEvent', [EventController::class, 'store']);
+Route::post('/calender/deleteEvent/{id}', [EventController::class, 'destroy']);

@@ -258,7 +258,7 @@
 
   <!-- Modal -->
   <div class="modal fade" id="delete_event_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-sm modal-top-right">
       <div class="modal-content text-center">
         <div class="modal-header bg-danger text-white d-flex justify-content-center">
           <h5 class="modal-title fs-5" id="exampleModalLabel"> Are you sure?</h5>
@@ -270,7 +270,7 @@
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-outline-danger" id="">Yes</button>
+          <button type="button" class="btn btn-outline-danger" id="delete_event">Yes</button>
         </div>
       </div>
     </div>

@@ -29,7 +29,6 @@ function display_calender() {
 
       $('#add_event').off().on('click', function (e) {
         e.preventDefault();
-        console.log('cliccked');
         addEvent();
         return false;
       });
@@ -39,6 +38,7 @@ function display_calender() {
       $('#display_event').modal("show");
 
       // Event Detail
+      const id = info.event.id;
       const title = info.event.title;
       const description = info.event.extendedProps.description;
       const start_date = moment(info.event.start).format("Do MMM YYYY");
@@ -50,6 +50,15 @@ function display_calender() {
       $('#event_description').text(description);
       $('#event_start').text(start_date);
       $('#event_end').text(end_date);
+
+      // Delete Event
+      $('#delete_event').off().on('click', function (e) {
+        e.preventDefault();
+        // console.log('delete', info.event.id);
+        deleteEvent(id);
+
+        return false;
+      });
 
     },
     eventDidMount: function (info) {
@@ -87,4 +96,22 @@ function addEvent() {
       alert('Error');
     }
   });
+}
+
+function deleteEvent(id) {
+
+  $.ajax({
+    type: 'POST',
+    url: 'api/calender/deleteEvent/' + id,
+    data: { id: id },
+    success: function (response) {
+      console.log(response);
+      $('#display_event').modal("hide");
+      $('#delete_event_modal').modal("hide");
+      display_calender();
+    },
+    error: function () {
+      alert('Error');
+    }
+  })
 }

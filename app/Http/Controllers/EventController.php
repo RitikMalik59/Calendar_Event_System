@@ -32,8 +32,10 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // echo 'success';
+        // $request->validate([
+        //     'title' => 'required',
+        //     'description' => 'required|email',
+        // ]);
         $data = $request->all();
         // dd($data);
         $event = Event::create($data);
@@ -59,8 +61,13 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Request $request, $id, Event $event)
     {
-        //
+        // echo $id;
+        // dd($request);
+        $delete_event = Event::find($id);
+        // dd($delete_event);
+        $delete_event->delete();
+        return response()->json($delete_event);
     }
 }
