@@ -100,16 +100,11 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <!-- <button type="submit" id="add_event" class="btn btn-primary">Add Event</button> -->
           <input type="submit" id="add_event" class="btn btn-primary" value="Add Event">
         </div>
       </div>
     </div>
   </div>
-  <!-- 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> -->
 
   <!-- Start popup dialog box -->
   <div class="modal fade" id="event_entry_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

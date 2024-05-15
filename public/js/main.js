@@ -22,10 +22,11 @@ function display_calender() {
       console.log(info);
       $('#calendarAddModal').modal("show");
       // document.getElementById("start_date").value = info.dateStr;
+      +
       $('#start_date').val(info.dateStr);
       $('#end_date').val(info.dateStr);
 
-      $('#add_event').on('click', function (e) {
+      $('#add_event').off().on('click', function (e) {
         e.preventDefault();
         console.log('cliccked');
         addEvent();
