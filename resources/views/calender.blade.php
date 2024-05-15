@@ -17,15 +17,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   <!-- Toast UI Calender -->
-  <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+  <!-- <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" /> -->
+  <!-- <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+  <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script> -->
 
   <!-- fullcalendar -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
-
-  <!-- CDN -->
-  <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
-  <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
-
 
   <title>Calender</title>
 </head>
@@ -37,22 +34,7 @@
   <!-- <div id="calendar" style="height: 800px"></div> -->
   <div id='calendar'></div>
 
-  <div id="" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-          <h4 id="modalTitle" class="modal-title"></h4>
-        </div>
-        <div id="modalBody" class="modal-body"> </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
+  <!-- Add Event Modal -->
   <div class="modal fade" id="calendarAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -221,7 +203,7 @@
     Display Event
   </button>
 
-  <!-- Modal -->
+  <!-- Display Event Modal -->
   <div class="modal fade" id="display_event" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -242,20 +224,14 @@
           </div>
           <div>
             <button type="button" class="btn btn-danger" data-bs-target="#delete_event_modal" data-bs-toggle="modal">Delete</button>
-            <button type="button" class="btn btn-warning">Edit</button>
+            <button type="button" class="btn btn-warning" data-bs-target="#edit_event_modal" data-bs-toggle="modal">Edit</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- delete modal -->
-
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_event">
-    delete
-  </button> -->
-
+  <!-- Delete Event modal -->
   <!-- Modal -->
   <div class="modal fade" id="delete_event_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-top-right">
@@ -271,6 +247,61 @@
         <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
           <button type="button" class="btn btn-outline-danger" id="delete_event">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Event Modal -->
+
+  <div class="modal fade" id="edit_event_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Event</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="edit_event_form" action="/api/calender/EditEvent" method="post">
+            @csrf
+            <div class="img-container">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="title">Event Title</label>
+                    <input type="text" name="title" id="edit_title" class="form-control" placeholder="Edit your event name">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Description:</label>
+                    <textarea class="form-control" name="description" id="edit_description" placeholder="Edit your description"></textarea>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="start_date">Event start</label>
+                    <input type="date" name="start_date" id="edit_start_date" class="form-control onlydatepicker" placeholder="Event start date">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="end_date">Event end</label>
+                    <input type="date" name="end_date" id="edit_end_date" class="form-control" placeholder="Event end date">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <input type="submit" id="edit_event" class="btn btn-primary" value="Edit Event">
         </div>
       </div>
     </div>

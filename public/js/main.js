@@ -19,7 +19,7 @@ function display_calender() {
     events: 'api/calender/getEvents',
     // eventColor: '#378006',
     dateClick: function (info) {
-      console.log(info);
+      console.log(info.dateStr);
       $('#calendarAddModal').modal("show");
       // document.getElementById("start_date").value = info.dateStr;
       $('#title').val('');
@@ -40,9 +40,12 @@ function display_calender() {
       // Event Detail
       const id = info.event.id;
       const title = info.event.title;
+      const start = info.event.start;
+      const end = info.event.end ?? start;
       const description = info.event.extendedProps.description;
-      const start_date = moment(info.event.start).format("Do MMM YYYY");
-      const end_date = info.event.end ? moment(info.event.end).format("Do MMM YYYY") : start_date;
+      const start_date = moment(start).format("Do MMM YYYY");
+      // console.log(start_date);
+      const end_date = moment(end).format("Do MMM YYYY");
       // console.log(info.event);
 
       // display in modal
@@ -56,6 +59,44 @@ function display_calender() {
         e.preventDefault();
         // console.log('delete', info.event.id);
         deleteEvent(id);
+
+        return false;
+      });
+
+      // Edit Event
+      $('#edit_title').val(title);
+      $('#edit_description').val(description);
+      $('#edit_start_date').val(moment(start).format('YYYY-MM-DD'));
+      $('#edit_end_date').val(moment(end).format('YYYY-MM-DD'));
+      // $('#edit_end_date').val();
+      // $('#edit_start_date').val('2024-05-08');
+      console.log(moment(info.event.start).format('L'));
+      // $('#edit_end_date').val(info.event.end);
+
+      $('#edit_event').off().on('click', function (e) {
+        e.preventDefault();
+        // console.log('Edit', info.event.id);
+        // console.log(title);
+        $.ajax({
+          type: "POST",
+          url: $('form#edit_event_form').attr('action') + '/' + id,
+          data: $('form#edit_event_form').serialize(),
+          success: function (response) {
+            console.log(response);
+
+            $('#display_event').modal("hide");
+            $('#edit_event_modal').modal("hide");
+            display_calender();
+            // display_calender();
+          },
+          error: function () {
+            alert('Error');
+          }
+        });
+
+
+
+
 
         return false;
       });
