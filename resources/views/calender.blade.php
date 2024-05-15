@@ -50,7 +50,7 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="title">Event Title</label>
-                    <input type="text" name="title" id="title" class="form-control" placeholder="Enter your event name">
+                    <input type="text" name="title" id="title" class="form-control" placeholder="Enter your event name" required>
                   </div>
                 </div>
               </div>
@@ -58,7 +58,7 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Description:</label>
-                    <textarea class="form-control" name="description" id="description"></textarea>
+                    <textarea class="form-control" name="description" id="description" required></textarea>
 
                   </div>
                 </div>
@@ -87,121 +87,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Start popup dialog box -->
-  <div class="modal fade" id="event_entry_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalLabel">Add New Event</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="img-container">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="event_name">Event name</label>
-                  <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Enter your event name">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="event_start_date">Event start</label>
-                  <input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="event_end_date">Event end</label>
-                  <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="save_event()">Save Event</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End popup dialog box -->
-
-  <div class="modal-dialog modal-frame modal-top">
-    <div class="modal-content rounded-0">
-      <div class="modal-body py-1">
-        <div class="d-flex justify-content-center align-items-center my-3">
-          <h4>
-            <span class="badge bg-primary">v52gs1</span>
-          </h4>
-          <p class="pt-3 mx-4">
-            We have a gift for you! Use this code to get a
-            <strong>10% discount</strong>.
-          </p>
-          <button type="button" class="btn btn-primary btn-sm ms-2" data-mdb-ripple-init="">Use it</button>
-
-          <button type="button" class="btn btn-info btn-sm ms-2" data-mdb-ripple-init="" data-mdb-dismiss="modal">
-            No, thanks
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button type="button" class="btn btn-primary mb-2" data-mdb-ripple-init="" data-mdb-modal-init="" data-mdb-target="#exampleFrameModal1" style="">
-    Top
-  </button>
-
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button> -->
-
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-    <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-    <div class="modal-dialog modal-frame modal-top">
-      <div class="modal-content rounded-0">
-        <div class="modal-body">
-          <div class="d-flex justify-content-center align-items-center my-3">
-            <h4>
-              <span class="badge bg-primary">v52gs1</span>
-            </h4>
-            <p class="pt-3 mx-4">
-              We have a gift for you! Use this code to get a
-              <strong>10% discount</strong>.
-            </p>
-            <button type="button" class="btn btn-primary btn-sm ms-2" data-mdb-ripple-init="">Use it</button>
-
-            <button type="button" class="btn btn-info btn-sm ms-2" data-mdb-ripple-init="" data-mdb-dismiss="modal">
-              No, thanks
-            </button>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- Display Event Modal -->
-
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#display_event">
-    Display Event
-  </button>
 
   <!-- Display Event Modal -->
   <div class="modal fade" id="display_event" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -307,60 +192,6 @@
     </div>
   </div>
 
-  <div class="modal-dialog modal-sm" id="delete_event">
-    <div class="modal-content text-center">
-      <div class="modal-header bg-danger text-white d-flex justify-content-center">
-        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-      </div>
-      <div class="modal-body">
-        <i class="fas fa-times fa-3x text-danger"></i>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-danger" data-mdb-ripple-init="">No</button>
-        <button type="button" class="btn btn-outline-danger" data-mdb-ripple-init="" data-mdb-dismiss="modal">
-          Yes
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-  <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Show a second modal and hide this one with the button below.
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Hide this modal and show the first with the button below.
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open first modal</button>
   <!-- footer     -->
   <script src="/js/main.js"></script>
   <!-- <script src="{{ asset('/js/main.js') }}"></script> -->

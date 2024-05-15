@@ -19,7 +19,7 @@ function display_calender() {
     events: 'api/calender/getEvents',
     // eventColor: '#378006',
     dateClick: function (info) {
-      console.log(info.dateStr);
+      // console.log(info.dateStr);
       $('#calendarAddModal').modal("show");
       // document.getElementById("start_date").value = info.dateStr;
       $('#title').val('');
@@ -29,7 +29,20 @@ function display_calender() {
 
       $('#add_event').off().on('click', function (e) {
         e.preventDefault();
-        addEvent();
+
+        const title = $('#title').val();
+        const description = $('#description').val();
+        const start_date = $('#start_date').val();
+        const end_date = $('#end_date').val();
+        // console.log(title, end_date, start_date, description);
+        if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
+
+          // console.log('not empty');
+          addEvent();
+        } else {
+          // console.log(' empty');
+          alert('Please submit all required field :) ');
+        }
         return false;
       });
 
@@ -70,32 +83,26 @@ function display_calender() {
       $('#edit_end_date').val(moment(end).format('YYYY-MM-DD'));
       // $('#edit_end_date').val();
       // $('#edit_start_date').val('2024-05-08');
-      console.log(moment(info.event.start).format('L'));
+      // console.log(moment(info.event.start).format('L'));
       // $('#edit_end_date').val(info.event.end);
 
       $('#edit_event').off().on('click', function (e) {
         e.preventDefault();
         // console.log('Edit', info.event.id);
         // console.log(title);
-        $.ajax({
-          type: "POST",
-          url: $('form#edit_event_form').attr('action') + '/' + id,
-          data: $('form#edit_event_form').serialize(),
-          success: function (response) {
-            console.log(response);
 
-            $('#display_event').modal("hide");
-            $('#edit_event_modal').modal("hide");
-            display_calender();
-            // display_calender();
-          },
-          error: function () {
-            alert('Error');
-          }
-        });
-
-
-
+        const title = $('#edit_title').val();
+        const description = $('#edit_description').val();
+        const start_date = $('#edit_start_date').val();
+        const end_date = $('#edit_end_date').val();
+        // console.log(title, end_date, start_date, description);
+        if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
+          // console.log('not empty');
+          editEvent(id);
+        } else {
+          // console.log(' empty');
+          alert('Please submit all required field :) ');
+        }
 
 
         return false;
@@ -129,7 +136,7 @@ function addEvent() {
     data: $('form#add_event_form').serialize(),
     success: function (response) {
       // alert(response);
-      console.log(response);
+      // console.log(response);
       $('#calendarAddModal').modal("hide");
       display_calender();
     },
@@ -155,4 +162,24 @@ function deleteEvent(id) {
       alert('Error');
     }
   })
+}
+
+function editEvent(id) {
+
+  $.ajax({
+    type: "POST",
+    url: $('form#edit_event_form').attr('action') + '/' + id,
+    data: $('form#edit_event_form').serialize(),
+    success: function (response) {
+      console.log(response);
+
+      $('#display_event').modal("hide");
+      $('#edit_event_modal').modal("hide");
+      display_calender();
+      // display_calender();
+    },
+    error: function () {
+      alert('Error');
+    }
+  });
 }
