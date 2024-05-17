@@ -58,8 +58,7 @@
                     <label for="title">Event Title</label>
                     <sup>*</sup>
                     <input type="text" name="title" id="title" class="form-control" placeholder="Enter your event name" required>
-                    <div class="invalid-feedback d-block" id="title_err_msg"></div>
-
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
               </div>
@@ -69,7 +68,7 @@
                     <label for="message-text" class="col-form-label">Description:</label>
                     <sup>*</sup>
                     <textarea class="form-control" name="description" id="description" required></textarea>
-                    <div class="invalid-feedback d-block" id="description_err_msg"></div>
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
               </div>
@@ -79,7 +78,7 @@
                     <label for="start_date">Event start</label>
                     <sup>*</sup>
                     <input required type="date" name="start_date" id="start_date" class="form-control onlydatepicker" placeholder="Event start date">
-                    <div class="invalid-feedback d-block" id="start_date_err_msg"></div>
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
                 <div class="col-sm-6">
@@ -87,7 +86,7 @@
                     <label for="end_date">Event end</label>
                     <sup>*</sup>
                     <input required type="date" name="end_date" id="end_date" class="form-control" placeholder="Event end date">
-                    <div class="invalid-feedback d-block" id="end_date_err_msg"></div>
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
               </div>

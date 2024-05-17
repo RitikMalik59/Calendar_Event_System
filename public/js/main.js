@@ -33,77 +33,12 @@ function display_calender() {
 
       $('#add_event').off().on('click', function (e) {
         e.preventDefault();
-
-        // const title = $('#title').val();
-        // const description = $('#description').val();
-        // const start_date = $('#start_date').val();
-        // const end_date = $('#end_date').val();
-        // // console.log(title, end_date, start_date, description);
-
-        // // validating Add event form
-        // if (title == '') {
-        //   $('#title_err_msg').text('Please enter a title for the event !');
-        //   $('#title').addClass('is-invalid');
-        // } else if (title != '') {
-        //   $('#title_err_msg').text('');
-        //   $('#title').removeClass('is-invalid').addClass('is-valid');
-        // }
-
-        // if (description == '') {
-        //   $('#description_err_msg').text('Please enter a description for the event !');
-        //   $('#descripti on').addClass('is-invalid');
-        // } else if (description != '') {
-        //   $('#description_err_msg').text('');
-        //   $('#description').removeClass('is-invalid').addClass('is-valid');
-        // }
-
-        // if (start_date == '') {
-        //   $('#start_date_err_msg').text('Please specify a start date for the event !');
-        //   $('#start_date').addClass('is-invalid');
-        // } else if (start_date != '') {
-        //   $('#start_date_err_msg').text('');
-        //   $('#start_date').removeClass('is-invalid').addClass('is-valid');
-        // }
-
-        // if (end_date == '') {
-        //   $('#end_date_err_msg').text('Please specify a end date for the event !');
-        //   $('#end_date').addClass('is-invalid');
-        // } else if (end_date != '') {
-        //   $('#end_date_err_msg').text('');
-        //   $('#end_date').removeClass('is-invalid').addClass('is-valid');
-        // }
-
-
-
-        // if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
-        //   addEvent();
-        // }
-
-        // just for the demos, avoids form submit
-
-        // const form = $("#add_event_form");
-        // form.validate({
-        //   // rules: {
-        //   //   field: {
-        //   //     required: true,
-        //   //     step: 10
-        //   //   }
-        //   // }
-        // });
-
-        // console.log(form.valid());
-
-        // if (form.valid()) {
-        //   addEvent();
-        // }
-
         const isValidForm = customValid($("#add_event_form"))
-        // console.log(isValidForm);
+        console.log(isValidForm);
 
         if (isValidForm) {
           addEvent();
         }
-
         return false;
       });
 
@@ -136,7 +71,7 @@ function display_calender() {
         return false;
       });
 
-      // Edit Event
+      // Edit Event default value
       $('#edit_title').val(title);
       $('#edit_description').val(description);
       $('#edit_start_date').val(moment(start).format('YYYY-MM-DD'));
@@ -145,30 +80,11 @@ function display_calender() {
       $('#edit_event').off().on('click', function (e) {
         e.preventDefault();
         // console.log('Edit', info.event.id);
-        // console.log(title);
-
-        const title = $('#edit_title').val();
-        const description = $('#edit_description').val();
-        const start_date = $('#edit_start_date').val();
-        const end_date = $('#edit_end_date').val();
-        // console.log(title, end_date, start_date, description);
-        // if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
-        //   // console.log('not empty');
-        //   editEvent(id);
-        // } else {
-        //   // console.log(' empty');
-        //   alert('Please submit all required field :) ');
-        // }
-
         const isValidForm = customValid($("#edit_event_form"))
-        console.log(isValidForm);
-
+        // console.log(isValidForm);
         if (isValidForm) {
-
           editEvent(id);
         }
-
-
         return false;
       });
 
@@ -187,8 +103,8 @@ function display_calender() {
       }
     }
 
-
   });
+
   calendar.render();
 }
 
@@ -224,7 +140,7 @@ function customValid(form) {
     } else {
       $input.removeClass('is-invalid').addClass('is-valid')
       $input.parent().find('.invalid-feedback').text('')
-      isValid = true;
+      // isValid = true;
     }
     // console.log(error);
   })
@@ -257,7 +173,7 @@ function deleteEvent(id) {
     url: 'api/calender/deleteEvent/' + id,
     data: { id: id },
     success: function (response) {
-      console.log(response);
+      // console.log(response);
       $('#display_event').modal("hide");
       $('#delete_event_modal').modal("hide");
       display_calender();
@@ -275,7 +191,7 @@ function editEvent(id) {
     url: $('form#edit_event_form').attr('action') + '/' + id,
     data: $('form#edit_event_form').serialize(),
     success: function (response) {
-      console.log(response);
+      // console.log(response);
 
       $('#display_event').modal("hide");
       $('#edit_event_modal').modal("hide");
