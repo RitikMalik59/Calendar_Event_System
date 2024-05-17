@@ -21,28 +21,89 @@ function display_calender() {
     dateClick: function (info) {
       // console.log(info.dateStr);
       $('#calendarAddModal').modal("show");
-      // document.getElementById("start_date").value = info.dateStr;
       $('#title').val('');
       $('#description').val('');
       $('#start_date').val(info.dateStr);
       $('#end_date').val(info.dateStr);
 
+      // remove all previous error
+      $('input').removeClass('is-invalid is-valid');
+      $('textarea').removeClass('is-invalid is-valid');
+      $('.invalid-feedback').text('');
+
       $('#add_event').off().on('click', function (e) {
         e.preventDefault();
 
-        const title = $('#title').val();
-        const description = $('#description').val();
-        const start_date = $('#start_date').val();
-        const end_date = $('#end_date').val();
-        // console.log(title, end_date, start_date, description);
-        if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
+        // const title = $('#title').val();
+        // const description = $('#description').val();
+        // const start_date = $('#start_date').val();
+        // const end_date = $('#end_date').val();
+        // // console.log(title, end_date, start_date, description);
 
-          // console.log('not empty');
+        // // validating Add event form
+        // if (title == '') {
+        //   $('#title_err_msg').text('Please enter a title for the event !');
+        //   $('#title').addClass('is-invalid');
+        // } else if (title != '') {
+        //   $('#title_err_msg').text('');
+        //   $('#title').removeClass('is-invalid').addClass('is-valid');
+        // }
+
+        // if (description == '') {
+        //   $('#description_err_msg').text('Please enter a description for the event !');
+        //   $('#descripti on').addClass('is-invalid');
+        // } else if (description != '') {
+        //   $('#description_err_msg').text('');
+        //   $('#description').removeClass('is-invalid').addClass('is-valid');
+        // }
+
+        // if (start_date == '') {
+        //   $('#start_date_err_msg').text('Please specify a start date for the event !');
+        //   $('#start_date').addClass('is-invalid');
+        // } else if (start_date != '') {
+        //   $('#start_date_err_msg').text('');
+        //   $('#start_date').removeClass('is-invalid').addClass('is-valid');
+        // }
+
+        // if (end_date == '') {
+        //   $('#end_date_err_msg').text('Please specify a end date for the event !');
+        //   $('#end_date').addClass('is-invalid');
+        // } else if (end_date != '') {
+        //   $('#end_date_err_msg').text('');
+        //   $('#end_date').removeClass('is-invalid').addClass('is-valid');
+        // }
+
+
+
+        // if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
+        //   addEvent();
+        // }
+
+        // just for the demos, avoids form submit
+
+        // const form = $("#add_event_form");
+        // form.validate({
+        //   // rules: {
+        //   //   field: {
+        //   //     required: true,
+        //   //     step: 10
+        //   //   }
+        //   // }
+        // });
+
+        // console.log(form.valid());
+
+        // if (form.valid()) {
+        //   addEvent();
+        // }
+
+        const isValidForm = customValid($("#add_event_form"))
+        // console.log(isValidForm);
+
+        if (isValidForm) {
           addEvent();
-        } else {
-          // console.log(' empty');
-          alert('Please submit all required field :) ');
         }
+
         return false;
       });
 
@@ -72,7 +133,6 @@ function display_calender() {
         e.preventDefault();
         // console.log('delete', info.event.id);
         deleteEvent(id);
-
         return false;
       });
 
@@ -81,10 +141,6 @@ function display_calender() {
       $('#edit_description').val(description);
       $('#edit_start_date').val(moment(start).format('YYYY-MM-DD'));
       $('#edit_end_date').val(moment(end).format('YYYY-MM-DD'));
-      // $('#edit_end_date').val();
-      // $('#edit_start_date').val('2024-05-08');
-      // console.log(moment(info.event.start).format('L'));
-      // $('#edit_end_date').val(info.event.end);
 
       $('#edit_event').off().on('click', function (e) {
         e.preventDefault();
@@ -96,12 +152,20 @@ function display_calender() {
         const start_date = $('#edit_start_date').val();
         const end_date = $('#edit_end_date').val();
         // console.log(title, end_date, start_date, description);
-        if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
-          // console.log('not empty');
+        // if (title !== '' && description !== '' && start_date !== '' && end_date !== '') {
+        //   // console.log('not empty');
+        //   editEvent(id);
+        // } else {
+        //   // console.log(' empty');
+        //   alert('Please submit all required field :) ');
+        // }
+
+        const isValidForm = customValid($("#edit_event_form"))
+        console.log(isValidForm);
+
+        if (isValidForm) {
+
           editEvent(id);
-        } else {
-          // console.log(' empty');
-          alert('Please submit all required field :) ');
         }
 
 
@@ -127,6 +191,46 @@ function display_calender() {
   });
   calendar.render();
 }
+
+
+function customValid(form) {
+  // find all the input fields
+  // loop and check if the input fields has required and max min attr
+  // depending on the attribute add condition and list the error message
+  // find the parent div and append the error message with proper class
+  // Also change the input class
+  // If all the validatioin is success then return True
+  // else return False
+  const inputs = form.find('input, textarea');
+  let isValid = true;
+
+  inputs.each((indx, input) => {
+    const error = []
+    const $input = $(input)
+    if ($input.attr('required') && $input.val() === '') {
+      error.push('This field is required !!!')
+    }
+    if ($input.attr('min') && $input.val() < $input.attr('min')) {
+      error.push('This field must be greater than' + $input.attr('min'))
+    }
+    if ($input.attr('max') && $input.val() > $input.attr('max')) {
+      error.push('This field must be less than' + $input.attr('max'))
+    }
+
+    if (error.length > 0) {
+      $input.addClass('is-invalid')
+      $input.parent().find('.invalid-feedback').text(error.join(', '))
+      isValid = false;
+    } else {
+      $input.removeClass('is-invalid').addClass('is-valid')
+      $input.parent().find('.invalid-feedback').text('')
+      isValid = true;
+    }
+    // console.log(error);
+  })
+  return isValid;
+}
+
 
 function addEvent() {
 

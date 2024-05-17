@@ -24,10 +24,16 @@
   <!-- fullcalendar -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script>
+
+  </script>
   <title>Calender</title>
 </head>
 
 <body>
+
   <h1 class="display-6 text-center">Calender Events Management System</h1>
 
 
@@ -50,7 +56,10 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="title">Event Title</label>
+                    <sup>*</sup>
                     <input type="text" name="title" id="title" class="form-control" placeholder="Enter your event name" required>
+                    <div class="invalid-feedback d-block" id="title_err_msg"></div>
+
                   </div>
                 </div>
               </div>
@@ -58,8 +67,9 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Description:</label>
+                    <sup>*</sup>
                     <textarea class="form-control" name="description" id="description" required></textarea>
-
+                    <div class="invalid-feedback d-block" id="description_err_msg"></div>
                   </div>
                 </div>
               </div>
@@ -67,13 +77,17 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="start_date">Event start</label>
-                    <input type="date" name="start_date" id="start_date" class="form-control onlydatepicker" placeholder="Event start date">
+                    <sup>*</sup>
+                    <input required type="date" name="start_date" id="start_date" class="form-control onlydatepicker" placeholder="Event start date">
+                    <div class="invalid-feedback d-block" id="start_date_err_msg"></div>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="end_date">Event end</label>
-                    <input type="date" name="end_date" id="end_date" class="form-control" placeholder="Event end date">
+                    <sup>*</sup>
+                    <input required type="date" name="end_date" id="end_date" class="form-control" placeholder="Event end date">
+                    <div class="invalid-feedback d-block" id="end_date_err_msg"></div>
                   </div>
                 </div>
               </div>
@@ -154,7 +168,8 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="title">Event Title</label>
-                    <input type="text" name="title" id="edit_title" class="form-control" placeholder="Edit your event name">
+                    <input required type="text" name="title" id="edit_title" class="form-control" placeholder="Edit your event name">
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
               </div>
@@ -162,8 +177,8 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Description:</label>
-                    <textarea class="form-control" name="description" id="edit_description" placeholder="Edit your description"></textarea>
-
+                    <textarea required class="form-control" name="description" id="edit_description" placeholder="Edit your description"></textarea>
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
               </div>
@@ -171,13 +186,15 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="start_date">Event start</label>
-                    <input type="date" name="start_date" id="edit_start_date" class="form-control onlydatepicker" placeholder="Event start date">
+                    <input required type="date" name="start_date" id="edit_start_date" class="form-control onlydatepicker" placeholder="Event start date">
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="end_date">Event end</label>
-                    <input type="date" name="end_date" id="edit_end_date" class="form-control" placeholder="Event end date">
+                    <input required type="date" name="end_date" id="edit_end_date" class="form-control" placeholder="Event end date">
+                    <span class="invalid-feedback d-block"></span>
                   </div>
                 </div>
               </div>
