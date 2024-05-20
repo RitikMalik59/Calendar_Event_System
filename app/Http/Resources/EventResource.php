@@ -14,6 +14,8 @@ class EventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $random_color = '#' . substr(md5(rand()), 0, 6);
+
         // return parent::toArray($request);
         return [
             'id' => $this->id,
@@ -23,6 +25,8 @@ class EventResource extends JsonResource
             'end' => $this->end_date,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'color' => $random_color,
+            'textColor' => 'white',
         ];
     }
 }

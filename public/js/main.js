@@ -11,12 +11,13 @@ function display_calender() {
 
     initialView: 'dayGridMonth',
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prevYear,prev,next,nextYear today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     timeZone: 'IST',// Asia/Kolkata
     events: 'api/calender/getEvents',
+    eventColor: '#378006',
     // eventColor: '#378006',
     dateClick: function (info) {
       // console.log(info.dateStr);
@@ -38,6 +39,7 @@ function display_calender() {
 
         if (isValidForm) {
           addEvent();
+          displayMessage('Event added successfully :)', 'success')
         }
         return false;
       });
@@ -68,6 +70,7 @@ function display_calender() {
         e.preventDefault();
         // console.log('delete', info.event.id);
         deleteEvent(id);
+        displayMessage('Event Deleted Successfully ! ', 'danger')
         return false;
       });
 
@@ -84,6 +87,7 @@ function display_calender() {
         // console.log(isValidForm);
         if (isValidForm) {
           editEvent(id);
+          displayMessage('Event updated successfully :)', 'warning')
         }
         return false;
       });
@@ -145,6 +149,24 @@ function customValid(form) {
     // console.log(error);
   })
   return isValid;
+}
+
+function displayMessage(message, type) {
+  const messageElement = $('#displayMessage');
+  const alert =
+    `
+    <div class='alert alert-${type} alert-dismissible' role='alert'>
+      <div>${message}</div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  `;
+
+  messageElement.html(alert);
+  setTimeout(() => {
+    messageElement.html('');
+    // console.log('timer');
+  }, 5000);
+
 }
 
 

@@ -35,7 +35,7 @@
 <body>
 
   <h1 class="display-6 text-center">Calender Events Management System</h1>
-
+  <div id="displayMessage"></div>
 
   <!-- <div id="calendar" style="height: 800px"></div> -->
   <div id='calendar'></div>
